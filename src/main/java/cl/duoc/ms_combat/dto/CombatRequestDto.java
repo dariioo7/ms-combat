@@ -10,4 +10,5 @@ public class CombatRequestDto {
     private Integer maxParticipants;
     private Integer experienceAwarded;
     private Integer coinsAwarded;
+    private String currencyType;
 }
