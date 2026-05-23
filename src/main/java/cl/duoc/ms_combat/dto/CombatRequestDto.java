@@ -2,7 +2,6 @@ package cl.duoc.ms_combat.dto;
 
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 public class CombatRequestDto {
@@ -10,4 +9,5 @@ public class CombatRequestDto {
     private Integer maxParticipants;
     private Integer experienceAwarded;
     private Integer coinsAwarded;
+    private String currencyType;
 }
