@@ -2,7 +2,6 @@ package cl.duoc.ms_combat.model;
 
 import cl.duoc.ms_combat.enums.CombatResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -34,19 +33,13 @@ public class Combat {
     private CombatResult result;
 
     private Integer experienceGained;
-
-    @JsonProperty("currencyGained")
     private Integer coinsGained;
-
     private LocalDateTime combatDate;
-    private String currencyType;
 
     @JsonIgnore
     private Integer baseExperience;
 
     @JsonIgnore
     private Integer baseCoins;
-
-
 
 }
