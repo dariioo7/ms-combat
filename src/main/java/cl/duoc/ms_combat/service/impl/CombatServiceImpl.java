@@ -1,6 +1,7 @@
 package cl.duoc.ms_combat.service.impl;
 
 import cl.duoc.ms_combat.client.CharacterFeignClient;
+import cl.duoc.ms_combat.client.CurrencyFeignClient;
 import cl.duoc.ms_combat.dto.CharacterDto;
 import cl.duoc.ms_combat.dto.CombatRequestDto;
 import cl.duoc.ms_combat.enums.CombatResult;
@@ -11,9 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +21,7 @@ public class CombatServiceImpl implements CombatService {
 
     private final CombatRepository combatRepository;
     private final CharacterFeignClient characterFeignClient;
+    private final CurrencyFeignClient currencyFeignClient;
 
     @Override
     public Combat createScenario(String enemy, Integer capacity, Integer exp, Integer coins) {
@@ -29,6 +30,7 @@ public class CombatServiceImpl implements CombatService {
         combat.setMaxParticipants(capacity);
         combat.setBaseExperience(exp);
         combat.setBaseCoins(coins);
+        combat.setCurrencyType(combat.getCurrencyType());
         combat.setCombatDate(LocalDateTime.now());
         return combatRepository.save(combat);
     }
@@ -68,6 +70,15 @@ public class CombatServiceImpl implements CombatService {
             combat.setExperienceGained((int) (combat.getBaseExperience() * 0.1));
             combat.setCoinsGained((int) (combat.getBaseCoins() * 0.1));
         }
+        Map<String, Object> currencyRequest = new HashMap<>();
+        currencyRequest.put("currencyType", combat.getCurrencyType());
+        currencyRequest.put("amount", combat.getCoinsGained());
+
+        try {
+            currencyFeignClient.addCurrency(combat.getUserId(), currencyRequest);
+        } catch (Exception e) {
+            System.out.println("Error al pagar la recompensa" + e.getMessage());
+        }
         return combatRepository.save(combat);
     }
 
@@ -75,4 +86,5 @@ public class CombatServiceImpl implements CombatService {
     public List<Combat> findAll() {
         return combatRepository.findAll();
     }
+
 }

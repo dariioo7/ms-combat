@@ -42,4 +42,6 @@ public class Combat {
     @JsonIgnore
     private Integer baseCoins;
 
+    private String currencyType;
+
 }
