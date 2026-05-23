@@ -24,7 +24,8 @@ public class CombatController {
                         dto.getEnemy(),
                         dto.getMaxParticipants(),
                         dto.getExperienceAwarded(),
-                        dto.getCoinsAwarded()
+                        dto.getCoinsAwarded(),
+                        dto.getCurrencyType()
                 ));
     }
 
