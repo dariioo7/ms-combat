@@ -30,8 +30,8 @@ public class CombatController {
     }
 
     @PostMapping("/{id}/assign-team/{userId}")
-    public ResponseEntity<Combat> assignTeam(@PathVariable Long id, @PathVariable Long userId, @RequestBody List<Long> characterIds) {
-        return ResponseEntity.ok(combatService.assignTeam(id, userId, characterIds));
+    public ResponseEntity<Combat> assignTeam(@PathVariable Long id, @PathVariable Long userId, @RequestBody List<String> characterNames) {
+        return ResponseEntity.ok(combatService.assignTeam(id, userId, characterNames));
     }
 
     @PostMapping("/{id}/play")

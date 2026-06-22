@@ -25,6 +25,8 @@ public class Combat {
     private List<Long> characterIds;
 
     @ElementCollection
+    @CollectionTable(name = "combat_character_names", joinColumns = @JoinColumn(name = "combat_id"))
+    @Column(name = "character_name")
     private List<String> characterNames;
 
     private Long userId;
@@ -41,5 +43,7 @@ public class Combat {
 
     @JsonIgnore
     private Integer baseCoins;
+
+    private String currencyType;
 
 }

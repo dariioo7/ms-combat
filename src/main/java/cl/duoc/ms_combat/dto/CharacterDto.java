@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CharacterDto {
-    private Long id;
+
     private Long userId;
-    private String name;
-    private Integer level;
+    private String characterName;
+    private int level;
     private String status;
 }
