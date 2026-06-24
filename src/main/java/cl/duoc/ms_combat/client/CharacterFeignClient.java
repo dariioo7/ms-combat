@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "ms-character", url = "http://localhost:8091/api/v1/characters")
+@FeignClient(name = "ms-character", url = "http://ms-character:8091/api/v1/character")
 public interface CharacterFeignClient {
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/roster/{userId}")
     List<CharacterDto> getCharactersByUserId(@PathVariable("userId") Long userId);
 
 }
